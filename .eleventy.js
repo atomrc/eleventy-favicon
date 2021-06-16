@@ -40,33 +40,32 @@ const faviconTypes = [
   ["apple-touch-icon.png", generatePngFavicon],
 ];
 
-module.exports = function (destination = "./_site") {
-  return function (config) {
-    config.addShortcode("favicon", async function (faviconFile) {
-      const { mtimeMs } = await fs.stat(faviconFile);
-      const lastGeneration = cache[faviconFile] || { mtime: 0, svg: false };
-      if (mtimeMs > lastGeneration.mtime) {
-        const metadata = await sharp(faviconFile).metadata();
-        cache[faviconFile] = { mtime: mtimeMs, svg: metadata.format === "svg" };
-        faviconTypes.forEach(([name, generator]) =>
-          generator(metadata, faviconFile).then(
-            saveFile(`${destination}/${name}`)
-          )
-        );
-        if (cache[faviconFile].svg) {
-          fs.copyFile(faviconFile, `${destination}/favicon.svg`);
-        }
+module.exports = function (config, options) {
+  const destination = options.destination || "./_site";
+  config.addShortcode("favicon", async function (faviconFile) {
+    const { mtimeMs } = await fs.stat(faviconFile);
+    const lastGeneration = cache[faviconFile] || { mtime: 0, svg: false };
+    if (mtimeMs > lastGeneration.mtime) {
+      const metadata = await sharp(faviconFile).metadata();
+      cache[faviconFile] = { mtime: mtimeMs, svg: metadata.format === "svg" };
+      faviconTypes.forEach(([name, generator]) =>
+        generator(metadata, faviconFile).then(
+          saveFile(`${destination}/${name}`)
+        )
+      );
+      if (cache[faviconFile].svg) {
+        fs.copyFile(faviconFile, `${destination}/favicon.svg`);
       }
+    }
 
-      const svgEntry = cache[faviconFile].svg
-        ? '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>'
-        : "";
+    const svgEntry = cache[faviconFile].svg
+      ? '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>'
+      : "";
 
-      return `
+    return `
 <link rel="icon" href="/favicon.ico">
 ${svgEntry}
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     `;
-    });
-  };
+  });
 };
