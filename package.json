@@ -1,0 +1,22 @@
+{
+  "name": "eleventy-favicon",
+  "version": "1.0.0",
+  "description": "Generate just the perfect amount of favicons for your static website",
+  "main": ".eleventy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eleventy",
+    "favicon",
+    "svg",
+    "png",
+    "ico"
+  ],
+  "author": "atomrc (Thomas Belin)",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.28.3",
+    "to-ico": "^1.1.5"
+  }
+}
