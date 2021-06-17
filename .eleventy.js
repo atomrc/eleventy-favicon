@@ -40,8 +40,11 @@ const faviconTypes = [
   ["apple-touch-icon.png", generatePngFavicon],
 ];
 
-module.exports = function (config, options) {
-  const destination = options.destination || "./_site";
+const defaultOptions = {
+  destination: "./_site",
+};
+module.exports = function (config, options = defaultOptions) {
+  const destination = options.destination || defaultOptions.destination;
   config.addShortcode("favicon", async function (faviconFile) {
     const { mtimeMs } = await fs.stat(faviconFile);
     const lastGeneration = cache[faviconFile] || { mtime: 0, svg: false };
