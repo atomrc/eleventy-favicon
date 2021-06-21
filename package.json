@@ -1,6 +1,6 @@
 {
   "name": "eleventy-favicon",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Generate just the perfect amount of favicons for your static website",
   "main": ".eleventy.js",
   "scripts": {
