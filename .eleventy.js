@@ -45,7 +45,7 @@ const defaultOptions = {
 };
 module.exports = function (config, options = defaultOptions) {
   const destination = options.destination || defaultOptions.destination;
-  config.addShortcode("favicon", async function (faviconFile) {
+  config.addAsyncShortcode("favicon", async function (faviconFile) {
     const { mtimeMs } = await fs.stat(faviconFile);
     const lastGeneration = cache[faviconFile] || { mtime: 0, svg: false };
     if (mtimeMs > lastGeneration.mtime) {
