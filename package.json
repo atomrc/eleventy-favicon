@@ -12,6 +12,7 @@
   },
   "keywords": [
     "eleventy",
+    "eleventy-plugin",
     "favicon",
     "svg",
     "png",
