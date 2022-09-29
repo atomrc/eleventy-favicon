@@ -20,7 +20,7 @@
   "author": "atomrc (Thomas Belin)",
   "license": "ISC",
   "dependencies": {
-    "sharp": "^0.30.4",
+    "sharp": "^0.31.1",
     "to-ico": "^1.1.5"
   }
 }
