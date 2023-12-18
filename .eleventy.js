@@ -62,7 +62,7 @@ module.exports = function (config, options = defaultOptions) {
     }
 
     const svgEntry = cache[faviconFile].svg
-      ? '<link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>'
+      ? '<link rel="icon" type="image/svg+xml" href="/favicon.svg">'
       : "";
 
     return `
